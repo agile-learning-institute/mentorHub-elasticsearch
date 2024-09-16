@@ -1,2 +1,4 @@
 # mentorHub-elasticsearch
-Elastic Search Database Configuration with MongoDB Connector
+
+Elastic Search Database Configurations with MongoDB Connector.
+
