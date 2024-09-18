@@ -24,7 +24,7 @@ class TestConfigFiles(unittest.TestCase):
         config._instance = None
         
         # Set Config Folder location
-        os.environ["CONFIG_FOLDER"] = "./test/configTest"
+        os.environ["CONFIG_FOLDER"] = "./test/test_config_files"
 
         # Initialize the Config object
         config.initialize()
