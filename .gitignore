@@ -1,4 +1,7 @@
-# Python Files
 *.DS_Store
-__pycache__/
-*.py[cod]  # ignore compiled bytecode files with .pyc, .pyo, .pyd extensions
+node_modules
+dist
+build
+.vscode
+importer.js
+.env
