@@ -1,8 +1,15 @@
 {
   "scripts": {
     "build": "webpack",
+    "prestart": "webpack; mh down; mh up elasticonly",
+    "start": "npm run local",
+    "local": "node ./src/searchinit/migrate.js",
+    "precontainer": "docker build --tag ghcr.io/agile-learning-institute/mentorhub-elasticsearch:latest .",
+    "container": "mh down; mh up elasticsearch",
+    "test": "./src/elastictester.sh",
     "import": "mh up mongodb && sleep 15 && node ./src/import/importer.js"
   },
+
   "devDependencies": {
     "@types/node": "^20.11.17",
     "ts-loader": "^9.5.1",
