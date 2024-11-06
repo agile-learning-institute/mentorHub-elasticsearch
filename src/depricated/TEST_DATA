@@ -1,0 +1,479 @@
+[
+  {
+    "_id": {
+      "collection_name": "encounters",
+      "collection_id": "aaaa00000000000000000001"
+    },
+    "completed": [
+      {
+        "name": "JeanBartikandtheENIACWom",
+        "link": "https://somevalidlink08.com",
+        "description": "The Description String",
+        "started": "2024-07-01T13:00:00",
+        "skills": [
+          "skill_A",
+          "skill_B"
+        ],
+        "tags": [
+          "Article",
+          "Book"
+        ],
+        "completed": "2024-07-01T14:30:00",
+        "rating": 4,
+        "review": "This was a great intro"
+      },
+      {
+        "name": "Markdown Tutorial",
+        "link": "https://www.markdowntutorial.com/lesson/1/",
+        "description": "The Description String",
+        "skills": [
+          "skil_C",
+          "skill_D"
+        ],
+        "tags": [
+          "User Guide",
+          "Interactive"
+        ],
+        "started": "2024-07-02T13:00:00",
+        "completed": "2024-07-03T19:36:00",
+        "rating": 3,
+        "review": "I had to read this twice before it made sense"
+      }
+    ],
+    "now": [
+      {
+        "name": "AWSStorageResource",
+        "link": "https://somevalidlink.35.com",
+        "description": "The Description String",
+        "skills": [
+          "skil-A",
+          "skill-B"
+        ],
+        "tags": [
+          "Reference",
+          "Data"
+        ],
+        "started": "2024-07-15T13:00:00"
+      },
+      {
+        "name": "Some Unique Resource",
+        "description": "The Description String",
+        "skills": [
+          "skil-C",
+          "skill-D"
+        ],
+        "tags": [
+          "Video",
+          "Exam"
+        ],
+        "link": "https://some.com/resource"
+      }
+    ],
+    "next": [
+      {
+        "path": "The Odin Project",
+        "segments": [
+          {
+            "segment": "Intermediate HTML and CSS",
+            "topics": [
+              {
+                "topic": "Intermediate HTML",
+                "resources": [
+                  {
+                    "name": "Howdocomputersreadcode?V",
+                    "link": "https://somevalidlink.22.com",
+                    "description": "The Description String",
+                    "skills": [
+                      "skil1",
+                      "skill2"
+                    ],
+                    "tags": [
+                      "Lesson",
+                      "Tutorial"
+                    ]
+                  },
+                  {
+                    "name": "A one-off resource",
+                    "link": "https://some.com/resource",
+                    "description": "The Description String",
+                    "skills": [
+                      "skil3",
+                      "skill4"
+                    ],
+                    "tags": [
+                      "Reference",
+                      "Data"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "later": [
+      "999900000000000000000000",
+      "999900000000000000000001",
+      "999900000000000000000003"
+    ],
+    "lastSaved": {
+      "atTime": "2024-02-27T18:17:58",
+      "byUser": "aaaa00000000000000000001",
+      "fromIp": "192.168.1.3",
+      "correlationId": "ae078031-7de2-4519-bcbe-fbd5e72b69d3"
+    }
+  },
+  {
+    "_id": {
+      "collection_name": "encounters",
+      "collection_id": "eeee00000000000000000003"
+    },
+    "date": "1/15/2024 0:00:00",
+    "personId": "aaaa00000000000000000004",
+    "mentorId": "aaaa00000000000000000027",
+    "planId": "EEFF00000000000000000004",
+    "status": "Active",
+    "observations": [
+      {
+        "type": "Check",
+        "prompt": "What do you want to focus on today?",
+        "options": [
+          "Now Questions",
+          "OTHER"
+        ],
+        "values": []
+      },
+      {
+        "type": "Text",
+        "prompt": "How would you describe what's happeningn now? Why?",
+        "options": [],
+        "values": []
+      },
+      {
+        "type": "Check",
+        "prompt": "During out time together, what woud you like to acomplish?",
+        "options": [
+          "New Now",
+          "OTHER"
+        ],
+        "values": []
+      },
+      {
+        "type": "Check",
+        "prompt": "What are some ideas to try, what one thing can we start with?",
+        "options": [
+          "Now Scope",
+          "OTHER"
+        ],
+        "values": []
+      },
+      {
+        "type": "Check",
+        "prompt": "What would you like to be able to share next time?",
+        "options": [
+          "New Now",
+          "OTHER"
+        ],
+        "values": []
+      },
+      {
+        "type": "Text",
+        "prompt": "How are your discoveries making a difference?",
+        "options": [],
+        "values": []
+      },
+      {
+        "type": "Text",
+        "prompt": "How would you like to close today?",
+        "options": []
+      }
+    ],
+    "lastSaved": {
+      "atTime": "2/27/2024 18:17:58",
+      "byUser": "AAAA00000000000000000001",
+      "fromIp": "192.168.1.3",
+      "correlationId": "ae078031-7de2-4519-bcbe-fbd5e72b69d3"
+    }
+  },
+  {
+    "_id": {
+      "collection_name": "partners",
+      "collection_id": "bbbb00000000000000000002"
+    },
+    "name": "Google Search",
+    "status": "Active",
+    "description": "Members that found us on Google"
+  },
+  {
+    "_id": {
+      "collection_name": "path",
+      "collection_id": "999900000000000000000002"
+    },
+    "name": "Salesforce",
+    "status": "Active",
+    "segments": [
+      {
+        "name": "Developer",
+        "topics": [
+          "AAAA00000000000000000001",
+          "AAAA00000000000000000002",
+          "AAAA00000000000000000003"
+        ]
+      }
+    ],
+    "lastSaved": {
+      "atTime": "2/27/2024 18:17:58",
+      "byUser": "AAAA00000000000000000001",
+      "fromIp": "192.168.1.3",
+      "correlationId": "ae078031-7de2-4519-bcbe-fbd5e72b69d3"
+    }
+  },
+  {
+    "_id": {
+      "collection_name": "people",
+      "collection_id": "AAAA00000000000000000000"
+    },
+    "userName": "JamesSmith",
+    "firstName": "James",
+    "lastName": "Smith",
+    "status": "Pending",
+    "roles": [
+      "Member"
+    ],
+    "mentorId": "AAAA00000000000000000005",
+    "partnerId": "bbbb00000000000000000007",
+    "title": "Apprentice",
+    "cadence": "Daily",
+    "eMail": "JamesSmith@fakemail.com",
+    "gitHub": "JamesSmith",
+    "device": "Mac (Intel)",
+    "location": "GVL SC",
+    "phone": "449-882-6722",
+    "description": "She was too busy always talking about what she wanted to do to actually do any of it.",
+    "lastSaved": {
+      "atTime": "2/27/2024 18:17:58",
+      "byUser": "AAAA00000000000000000001",
+      "fromIp": "192.168.1.3",
+      "correlationId": "ae078031-7de2-4519-bcbe-fbd5e72b69d3"
+    }
+  },
+  {
+    "_id": {
+      "collection_name": "people",
+      "collection_id": "AAAA00000000000000000001"
+    },
+    "userName": "MichaelSmith",
+    "firstName": "Michael",
+    "lastName": "Smith",
+    "status": "Active",
+    "roles": [
+      "Member"
+    ],
+    "mentorId": "AAAA00000000000000000007",
+    "partnerId": "bbbb00000000000000000005",
+    "title": "Apprentice",
+    "cadence": "Monthly",
+    "eMail": "MichaelSmith@fakemail.com",
+    "gitHub": "MichaelSmith",
+    "device": "Mac (Apple)",
+    "location": "Milford Deleware",
+    "phone": "875-959-5595",
+    "description": "Malls are great places to shop; I can find everything I need under one roof.",
+    "lastSaved": {
+      "atTime": "2/27/2024 18:17:58",
+      "byUser": "AAAA00000000000000000001",
+      "fromIp": "192.168.1.3",
+      "correlationId": "ae078031-7de2-4519-bcbe-fbd5e72b69d3"
+    }
+  },
+  {
+    "_id": {
+      "collection_name": "plans",
+      "collection_id": "EEFF00000000000000000002"
+    },
+    "name": "Introductions",
+    "description": "The initial discovery call",
+    "status": "Active",
+    "checklist": [
+      {
+        "type": "Check",
+        "prompt": "Introductions",
+        "options": [
+          "Mike",
+          "Institute"
+        ]
+      },
+      {
+        "type": "Text",
+        "prompt": "Tell me about you",
+        "options": []
+      },
+      {
+        "type": "Check",
+        "prompt": "Who is involved",
+        "options": [
+          "Spouse",
+          "Children",
+          "Extended Family",
+          "OTHER"
+        ]
+      },
+      {
+        "type": "Text",
+        "prompt": "What's happening now, why?",
+        "options": []
+      },
+      {
+        "type": "Check",
+        "prompt": "What matters most?",
+        "options": [
+          "Employment",
+          "OTHER"
+        ]
+      },
+      {
+        "type": "Check",
+        "prompt": "Agreements",
+        "options": [
+          "Now Scope",
+          "Onboarding Scheduled"
+        ]
+      },
+      {
+        "type": "Text",
+        "prompt": "GitHub ID",
+        "options": []
+      },
+      {
+        "type": "Text",
+        "prompt": "Discord ID",
+        "options": []
+      }
+    ],
+    "lastSaved": {
+      "atTime": "4/3/2024 18:17:58",
+      "byUser": "AAAA00000000000000000001",
+      "fromIp": "192.168.1.39",
+      "correlationId": "ae078031-7de2-4519-bcbe-fbd5e72b69d3"
+    }
+  },
+  {
+    "_id": {
+      "collection_name": "topic",
+      "collection_id": "AAAA00000000000000000012"
+    },
+    "name": "OdinIntro",
+    "status": "Active",
+    "description": "An introduction to Web Development",
+    "category": "Foundations of ITSM",
+    "resources": [
+      {
+        "name": "HowThisCourseWillWork",
+        "link": "https://somevalidlink.54.com",
+        "description": "How This Course Will Work",
+        "skills": [
+          1
+        ],
+        "tags": [
+          "$",
+          "Book",
+          "Exam",
+          "Interactive",
+          "Lecture",
+          "Reference",
+          "Tutorial",
+          "User Guide",
+          "API",
+          "Data"
+        ]
+      },
+      {
+        "name": "IntroductiontoWebDevelop",
+        "link": "https://somevalidlink.55.com",
+        "description": "Introduction to Web Development",
+        "skills": [
+          1
+        ],
+        "tags": [
+          "Article",
+          "Book",
+          "Lecture",
+          "Reference"
+        ]
+      },
+      {
+        "name": "MotivationandMindset",
+        "link": "https://somevalidlink.56.com",
+        "description": "Motivation and Mindset",
+        "skills": [
+          1
+        ],
+        "tags": [
+          "$",
+          "Article",
+          "Book",
+          "Exam",
+          "Lesson",
+          "Reference",
+          "User Guide",
+          "UI/UX",
+          "API"
+        ]
+      },
+      {
+        "name": "AskingForHelp",
+        "link": "https://somevalidlink.57.com",
+        "description": "Asking For Help",
+        "skills": [
+          1
+        ],
+        "tags": [
+          "Book",
+          "Interactive",
+          "Reference",
+          "Video",
+          "API",
+          "Data"
+        ]
+      },
+      {
+        "name": "JointheOdinCommunity",
+        "link": "https://somevalidlink.58.com",
+        "description": "Join the Odin Community",
+        "skills": [
+          1
+        ],
+        "tags": [
+          "$",
+          "Article",
+          "Book",
+          "Interactive",
+          "Lecture",
+          "Video",
+          "UI/UX",
+          "API",
+          "Data"
+        ]
+      }
+    ],
+    "skills": [
+      {
+        "name": "Simple Skill",
+        "description": "A simple skill you can get"
+      },
+      {
+        "name": "Web Dev Basics",
+        "description": "Understanding HTML and CSS concepts",
+        "mastery": "Apprentice",
+        "speciality": "UI/UX Engineer"
+      }
+    ],
+    "lastSaved": {
+      "atTime": "4/3/2024 18:17:58",
+      "byUser": "AAAA00000000000000000001",
+      "fromIp": "192.168.1.39",
+      "correlationId": "ae078031-7de2-4519-bcbe-fbd5e72b69d3"
+    }
+  }
+]

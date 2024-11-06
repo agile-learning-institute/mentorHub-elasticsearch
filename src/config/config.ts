@@ -1,43 +1,55 @@
+/**
+ * Class Config: This Singleton class manages configuration values 
+ *      from the enviornment or configuration files.
+ */
+
 import { existsSync, readFileSync } from "fs";
 import { join } from 'path';
 
-/**
- * A config item, used to track where configuration values were found
- */
-interface ConfigItem
-{
+interface ConfigItem {
     name: string;
     value: string;
     from: string;
 }
 
-/**
- * Class Config: This class manages configuration values 
- *      from the enviornment or configuration files, 
- *      and abstracts all file and mongodb i-o.
- */
-export class Config
-{
-    private configItems: ConfigItem[] = []; // Configuration Items 
-    private configFolder: string = "";      // Where input configurations are found
-    private connectionString: string;       // Database Connection String
-    private dbName: string;                 // Database Name
-    private msmRootFolder: string;          // Where system resources (/apps & /msmTypes) are found 
-    private loadTestData: boolean;          // Load test data flag
-    private enumerators: any;               // System enumerators
+export class Config {
+    private static instance: Config; // Singleton 
+
+    configItems: ConfigItem[] = [];
+    version: string = "";
+    loadTestData: boolean = false;
+    configFolder: string = "/opt/mentorhub-elasticsearch";
+    connectionString: string = '{"node":"https://@mentorhub-searchdb:9200","auth":{"username":"elastic","password":"o0=eLmmQbsrdEW89a-Id"},"tls":{"ca":"","rejectUnauthorized":false}}';
+    clientOptions: any;
+    indexName: string = "mentorHub";
+    indexMapping: any = {};
+
+    mongoConnectionString: string = "mongodb://root:example@localhost:27017";
+    dbName: string = "mentorhub";
+    collections: string[] = [];
+    collections_default_string = '["curriculum", "encounters", "partners", "paths", "people", "plans", "topics"]';
 
     /**
      * Constructor gets configuration values, loads the enumerators, and logs completion
      */
-    constructor()
-    {
-        this.getConfigValue("BUILT_AT", "LOCAL", false);
-        this.configFolder = this.getConfigValue("CONFIG_FOLDER", "/opt/mongoSchemaManager/configurations", false);
-        this.msmRootFolder = this.getConfigValue("MSM_ROOT", "/opt/mongoSchemaManager", false);
-        this.connectionString = this.getConfigValue("CONNECTION_STRING", "mongodb://root:example@localhost:27017", true);
-        this.dbName = this.getConfigValue("DB_NAME", "test", false);
-        this.loadTestData = this.getConfigValue("LOAD_TEST_DATA", "false", false) === "true";
+    constructor() {
+        this.initialize();
+    }
 
+    public initialize() {
+        // Initilze Values
+        this.configItems = [];
+        this.version = "1.0." + this.getConfigValue("BUILT_AT", "LOCAL", false);
+        this.configFolder = this.getConfigValue("CONFIG_FOLDER", this.configFolder, false);
+        this.loadTestData = (this.getConfigValue("LOAD_TEST_DATA", "false", false) === "True");
+        this.clientOptions = JSON.parse(this.getConfigValue("CLIENT_OPTIONS", '{"node":"http://localhost:9200"}', false));
+        this.connectionString = this.getConfigValue("CONNECTION_STRING", this.connectionString, true);
+        this.indexName = this.getConfigValue("INDEX_NAME", this.indexName, false);
+        this.indexMapping = JSON.parse(this.getConfigValue("INDEX_MAPPING", "{}", false));
+
+        this.mongoConnectionString = this.getConfigValue("MONGO_CONNECTION_STRING", this.mongoConnectionString, true);
+        this.dbName = this.getConfigValue("MONGO_DBNAME", this.dbName, false);
+        this.collections = JSON.parse(this.getConfigValue("MONGO_COLLECTIONS", this.collections_default_string, false));
         console.info("Configuration Initilized:", JSON.stringify(this.configItems));
     }
 
@@ -52,8 +64,7 @@ export class Config
      * @param isSecret 
      * @returns the value that was found.
      */
-    private getConfigValue(name: string, defaultValue: string, isSecret: boolean): string
-    {
+    private getConfigValue(name: string, defaultValue: string, isSecret: boolean): string {
         let value = process.env[name] || defaultValue;
         let from = 'default';
 
@@ -67,112 +78,25 @@ export class Config
             }
         }
 
-        this.configItems.push({ name, value, from });
+        this.configItems.push({
+            name: name,
+            value: isSecret ? "secret" : value,
+            from: from
+        });
         return value;
     }
 
     /**
-    * Get the named enumerators object from the enumerators version specified
-    * 
-    * @param version 
-    * @param name 
-    * @returns enumerators object {"Value":"Description"}
-    */
-    public getEnums(version: number, name: string): any
-    {
-        if (this.enumerators[version].version != version) {
-            throw new Error("Invalid Enumerators File bad version number sequence");
-        }
-        if (this.enumerators[version].enumerators.hasOwnProperty(name)) {
-            return this.enumerators[version].enumerators[name];
-        } else {
-            throw new Error("Enumerator does not exist:" + name);
-        }
-    }
-
-    /**
-     * Simple Setters
+     * Singleton Constructor
      */
-    public setEnumerators(enums: any)
-    {
-        this.enumerators = enums;
-    }
-
-    /** 
-     * Simple Getters
-     */
-    public shouldLoadTestData(): boolean
-    {
-        return this.loadTestData;
-    }
-
-    public getConfigItems(): ConfigItem[]
-    {
-        return this.configItems;
-    }
-
-    public getMsmRootFolder(): string
-    {
-        return this.msmRootFolder;
-    }
-
-    public getConfigFolder(): string
-    {
-        return this.configFolder;
-    }
-
-    public getCollectionsFolder()
-    {
-        return join(this.configFolder, "collections");
-    }
-
-    public getMsmTypesFolder(): string
-    {
-        return join(this.msmRootFolder, "msmTypes");
-    }
-
-    public getCustomTypesFolder(): string
-    {
-        return join(this.configFolder, "customTypes");
-    }
-
-    public getMsmEnumeratorsFolder(): string
-    {
-        return join(this.configFolder, "enumerators");
-    }
-
-    public getMsmEnumeratorsFile(): string
-    {
-        return join(this.getMsmEnumeratorsFolder(), "enumerators.json");
-    }
-
-    public getMsmEnumerators(): any
-    {
-        return this.enumerators;
-    }
-
-    public getOpenApiFolder(): string
-    {
-        return join(this.configFolder, "openApi");
-    }
-
-    public getSchemasFolder(): string
-    {
-        return join(this.configFolder, "schemas");
-    }
-
-    public getTestDataFolder(): string
-    {
-        return join(this.configFolder, "testData");
-    }
-
-    public getConnectionString(): string
-    {
-        return this.connectionString;
-    }
-
-    public getDbName(): string
-    {
-        return this.dbName;
+    public static getInstance(): Config {
+        if (!Config.instance) {
+            Config.instance = new Config();
+        }
+        return Config.instance;
     }
 }
+
+// Create a singleton instance of Config and export it
+const config = Config.getInstance();
+export default config;
