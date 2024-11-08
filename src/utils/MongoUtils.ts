@@ -17,8 +17,8 @@ export default class MongoUtils {
             const collection = db.collection(collectionName);
             const results = await collection.find({}).toArray() as any[];
             results.forEach((doc) => {
-                const originalId = doc._id;  
-                doc._id = { collection_name: collectionName, collection_id: originalId };  // Replace _id with new object
+                doc.search_key = { collection_name: collectionName, collection_id: doc._id };  
+                delete doc._id;
                 docs.push(doc);
             });
         }

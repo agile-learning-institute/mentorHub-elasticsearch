@@ -47,7 +47,6 @@ export default class ElasticUtils {
         let errors = [];
         let count = 0;
         for (const theDoc of testData) {
-            console.log(`adding item ${count}`);
             const response = await this.elasticSearchClient.index({index: indexName, document: theDoc});
             count++;
             if (response && response.result != "created") {

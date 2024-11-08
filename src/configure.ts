@@ -30,7 +30,9 @@ export class Configurator {
         const configurator = new Configurator();
         await configurator.configure();
         console.log("Processing completed successfully");
+        process.exit(0);
     } catch (error) {
         console.log("Exception Occured: ", error);
+        process.exit(1);
     }
 })();

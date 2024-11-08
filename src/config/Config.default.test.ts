@@ -27,13 +27,13 @@ describe('Config', () => {
     });
 
     test('test CONNECTION_STRING', () => {
-        const expected = '{"node":"https://@mentorhub-searchdb:9200","auth":{"username":"elastic","password":"o0=eLmmQbsrdEW89a-Id"},"tls":{"ca":"","rejectUnauthorized":false}}';
+        const expected = '{}';
         expect(config.connectionString).toBe(expected);
         testConfigDefaultValue("CONNECTION_STRING", "secret");
     });
 
     test('test MONGO_DBNAME', () => {
-        const expected = "mentorhub";
+        const expected = "mentorHub";
         expect(config.dbName).toBe(expected);
         testConfigDefaultValue("MONGO_DBNAME", expected);
     });
@@ -44,7 +44,7 @@ describe('Config', () => {
     });
 
     test('test INDEX_NAME', () => {
-        const expected = "mentorHub";
+        const expected = "mentorhub";
         expect(config.indexName).toBe(expected);
         testConfigDefaultValue("INDEX_NAME", expected);
     });

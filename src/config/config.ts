@@ -19,13 +19,13 @@ export class Config {
     version: string = "";
     loadTestData: boolean = false;
     configFolder: string = "/opt/mentorhub-elasticsearch";
-    connectionString: string = '{"node":"https://@mentorhub-searchdb:9200","auth":{"username":"elastic","password":"o0=eLmmQbsrdEW89a-Id"},"tls":{"ca":"","rejectUnauthorized":false}}';
+    connectionString: string = '{}';
     clientOptions: any;
-    indexName: string = "mentorHub";
+    indexName: string = "mentorhub";
     indexMapping: any = {};
 
     mongoConnectionString: string = "mongodb://root:example@localhost:27017";
-    dbName: string = "mentorhub";
+    dbName: string = "mentorHub";
     collections: string[] = [];
     collections_default_string = '["curriculum", "encounters", "partners", "paths", "people", "plans", "topics"]';
 
@@ -41,7 +41,7 @@ export class Config {
         this.configItems = [];
         this.version = "1.0." + this.getConfigValue("BUILT_AT", "LOCAL", false);
         this.configFolder = this.getConfigValue("CONFIG_FOLDER", this.configFolder, false);
-        this.loadTestData = (this.getConfigValue("LOAD_TEST_DATA", "false", false) === "True");
+        this.loadTestData = (this.getConfigValue("LOAD_TEST_DATA", "false", false) === "true");
         this.clientOptions = JSON.parse(this.getConfigValue("CLIENT_OPTIONS", '{"node":"http://localhost:9200"}', false));
         this.connectionString = this.getConfigValue("CONNECTION_STRING", this.connectionString, true);
         this.indexName = this.getConfigValue("INDEX_NAME", this.indexName, false);
