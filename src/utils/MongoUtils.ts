@@ -22,6 +22,7 @@ export default class MongoUtils {
                 docs.push(doc);
             });
         }
+        await this.mongoClient.close()
         console.info(`Harvested ${docs.length} documents from ${collections.length} collections`);
         return docs;
     }   
