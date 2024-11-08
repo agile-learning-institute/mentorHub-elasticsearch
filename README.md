@@ -1,8 +1,6 @@
 # mentorhub-elasticsearch
 
-This repository builds a containerized utility that is used to configure the Elasticsearch database used by mentorHub for search services, and optionally load test data. 
-
-[Here](https://github.com/orgs/agile-learning-institute/repositories?q=mentorhub-&type=all&sort=name) are all of the repositories in the [mentorHub](https://github.com/agile-learning-institute/mentorhub/tree/main) system
+This repository builds a containerized utility that is used to configure the Elasticsearch database used by mentorHub for search services, and optionally load test data harvested from a MongoDB database. 
 
 ## DISCLAIMER
 Running the Elasticsearch and Kibana backing services as containers will cause you to download quite large docker images. If you are working in a capacity or performance constrained environment you should schedule the downloading of these images accordingly. 
@@ -10,7 +8,7 @@ Running the Elasticsearch and Kibana backing services as containers will cause y
 ## Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [MentorHub Developer Edition](https://github.com/agile-learning-institute/mentorHub/tree/main/mentorHub-developer-edition) - to easily run the containers locally
+- [MentorHub Developer Edition](https://github.com/agile-learning-institute/mentorHub/tree/main/mentorHub-developer-edition) 
 - [NodeJS and NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ## Customize configuration
@@ -18,12 +16,16 @@ Running the Elasticsearch and Kibana backing services as containers will cause y
 See [Tsconfig Reference](https://www.typescriptlang.org/tsconfig)
 
 ## Contributing
-The typescript files found in `./src/searchinit/` are used to grab test data from a `test-data.json` and perform the necessary data transformations before indexing the test data. There is a CLI tool at```./src/searchinit/elasticsearch-test.sh``` that can be used to run various tests on your elasticsearch container.
+The `./src/configure.ts` script is the entrypoint for this utility. 
 
+### Seperation of Concerns
+The `./src/config` folder contains runtime configuration management code. The `./src/utils` folder contains mongodb and elasticsearch IO functions. 
+
+### Workflow
 You should do all work in a feature branch, and when you are ready to have your code deployed to the cloud open a pull request against that feature branch. Do not open a pull request without first building and testing the containers locally.
 
 ## Build 
-To build code for deployment
+To build code for production deployment
 ```bash
 npm run build
 ```
@@ -47,12 +49,6 @@ Use the following command to build and run the container with backing services.
 npm run container
 ```
 
-## Harvest test data
-Use this command to connect to the backing mongodb and harvest test data
-```bash
-npm run import
-```
-
 ## Test the output
 Use this command to test the output
 ```bash
@@ -60,8 +56,23 @@ npm run test
 ```
 
 ## Using Kibana to verify configuration
-The docker compose file always starts Kibana along with ElasticSearch. You can use [the Kibana dashboard](http://localhost:5601) to run queries or review configurations of the Elasticsearch database.
+The docker compose file always starts Kibana along with ElasticSearch. You can use [the Kibana dashboard](http://localhost:5601). Choose `Dev Tools` from the hamburger menu, to run queries or review configurations of the Elasticsearch database. Here are a few handy elasticsearch queries to run in Kibana:
+
+### List Indexes
+```
+GET /_cat/indices
+```
+
+### Get all indexed documents
+```
+GET mentorhub/_search
+```
+
+### Delete the index and all data
+```
+DELETE /mentorhub
+```
 
 ## Elasticsearch docker reference
-[this guide](hhttps://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html) provides valuable configuration and troubleshooting guides.
+[this guide](hhttps://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html) provides valuable configuration and troubleshooting guides for the elasticsearch container.
 
