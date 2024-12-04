@@ -5,7 +5,7 @@ describe('ElasticUtils', () => {
 
     var elastic = new ElasticUtils({"node":"http://localhost:9200"});
 
-    // Initilize 
+    // initialize 
     beforeEach(async () => {
     });
 

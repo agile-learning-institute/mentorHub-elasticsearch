@@ -24,7 +24,7 @@ export class Config {
     indexName: string = "mentorhub";
     indexMapping: any = {};
 
-    mongoConnectionString: string = "mongodb://root:example@localhost:27017";
+    mongoConnectionString: string = "mongodb://mongodb:27017/?replicaSet=rs0";
     dbName: string = "mentorHub";
     collections: string[] = [];
     collections_default_string = '["curriculum", "encounters", "partners", "paths", "people", "plans", "topics"]';
@@ -50,7 +50,7 @@ export class Config {
         this.mongoConnectionString = this.getConfigValue("MONGO_CONNECTION_STRING", this.mongoConnectionString, true);
         this.dbName = this.getConfigValue("MONGO_DBNAME", this.dbName, false);
         this.collections = JSON.parse(this.getConfigValue("MONGO_COLLECTIONS", this.collections_default_string, false));
-        console.info("Configuration Initilized:", JSON.stringify(this.configItems));
+        console.info("Configuration initialized:", JSON.stringify(this.configItems));
     }
 
     /**

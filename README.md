@@ -35,7 +35,7 @@ To start the backing service and run the script locally use this script.
 ```bash
 npm run start
 ```
-NOTE: This command does a ``mh down`` to initilize the docker environment before starting the elasticsearch database with kibana.
+NOTE: This command does a ``mh down`` to initialize the docker environment before starting the elasticsearch database with kibana.
 
 ## Testing changes without backing services
 To run the script locally without starting any backing services use this script.

@@ -5,7 +5,7 @@ import config from './Config';
 
 describe('Config', () => {
     
-    // Initilize Config
+    // initialize Config
     beforeEach(() => {
         config.initialize();
     });
