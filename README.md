@@ -73,6 +73,35 @@ GET mentorhub/_search
 DELETE /mentorhub
 ```
 
+### Find all documents
+```
+GET mentorhub/_search
+```
+
+### Find all curriculum documents
+```
+GET mentorhub/_search
+{
+  "query": {
+    "match": {
+      "collection_name": "curriculum"
+    }
+  }
+}
+```
+
+### Find all inactive people documents
+```
+GET mentorhub/_search
+{
+  "query": {
+    "query_string": {
+      "query": "Inactive people"
+    }
+  }
+}
+```
+
 ## Elasticsearch docker reference
 [this guide](hhttps://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html) provides valuable configuration and troubleshooting guides for the elasticsearch container.
 
