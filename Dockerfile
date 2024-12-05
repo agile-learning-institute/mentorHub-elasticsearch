@@ -13,7 +13,7 @@ RUN npm run build
 RUN echo $(date) > ./dist/BUILT_AT
 
 # Stage 2: Run the app in a lightweight image
-FROM node:21-alpine as deploy
+FROM node:21-alpine AS deploy
 
 # Copy files from build
 WORKDIR /opt/mentorhub-elasticsearch
