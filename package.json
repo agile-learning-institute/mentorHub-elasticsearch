@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "build": "npx webpack --config webpack.config.js",
+    "prestart": "npm run build; mh down; mh up mongodb,elasticonly",
+    "start": "sleep 3; npm run local",
+    "local": "LOAD_TEST_DATA=true node dist/bundle.js",
+    "precontainer": "docker build --tag ghcr.io/agile-learning-institute/mentorhub-elasticsearch:latest .",
+    "container": "mh down; mh up mongodb,elasticsearch",
+    "test": "npx jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "@types/node": "^20.11.17",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.13.1",
+    "jest": "^29.7.0",
+    "mongodb": "^6.6.1"
+  }
+}
