@@ -2,7 +2,7 @@
  * This set of unit tests test config init from files
  * and uses the files in /test/configTest
  */
-import config from './Configtemp';
+import config from './Config';
 
 describe('Config', () => {
 

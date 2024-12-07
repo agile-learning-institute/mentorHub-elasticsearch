@@ -1,4 +1,4 @@
-import config from './config/Configtemp';
+import config from './config/Config';
 import ElasticUtils from './utils/ElasticUtils';
 import MongoUtils from './utils/MongoUtils';
 

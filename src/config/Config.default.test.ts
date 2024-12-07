@@ -1,7 +1,7 @@
 /**
  * This set of unit tests test config init from env
  */
-import config from './Configtemp';
+import config from './Config';
 
 describe('Config', () => {
     
