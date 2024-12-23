@@ -36,6 +36,6 @@ describe('ElasticUtils', () => {
         expect(result).toBe('Index test_index created');
 
         result = await elastic.indexTestData("test_index", [{"name":"Foo"},{"name":"Bar"}]);
-        expect(result).toBe("Test Data Processed 2 records, with 0 errors");
+        expect(result).toBe("Processing Created 1 documents, Updated 1 documents, 0 Noop - Total: 2");
     });
 });
