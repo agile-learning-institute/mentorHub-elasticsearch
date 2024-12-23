@@ -2,64 +2,83 @@
  * This set of unit tests test config init from files
  * and uses the files in /test/configTest
  */
-import config from './Config';
+import Config from './Config';
 
 describe('Config', () => {
+    let config = Config.getInstance();
 
     // Clear all mocks before each test
     beforeEach(() => {
-        process.env.CONFIG_FOLDER = "./test"
+        process.env.CONFIG_FOLDER = "./test/configTest"
         config.initialize();
         process.env.CONFIG_FOLDER = "";
     });
 
-    test('test LOAD_TEST_DATA', () => {
-        testConfigFileValue("LOAD_TEST_DATA");
+    test('test fileStrings', () => {
+        const testScope = {
+            ...config.stringPropertyDefaults,
+            ...config.secretStringPropertyDefaults
+        };
+        for (const [key, defaultValue] of Object.entries(testScope)) {
+            if (key == "BUILT_AT") {
+                expect(config.BUILT_AT).toBe("LOCAL");
+            } else if (key == "CONFIG_FOLDER") {
+                expect(config.CONFIG_FOLDER).toBe("./test/configTest");
+            } else {
+                expect((config as any)[key]).toBe("TEST_VALUE");
+            }
+        }
     });
 
-    test('test CONNECTION_STRING', () => {
-        testConfigFileValue("CONNECTION_STRING", true);
+    test('test fileIntegers', () => {
+        for (const [key, defaultValue] of Object.entries(config.integerPropertyDefaults)) {
+            expect((config as any)[key]).toBe(9999);
+        }
     });
 
-    test('test MONGO_CONNECTION_STRING', () => {
-        testConfigFileValue("MONGO_CONNECTION_STRING", true);
+    test('test fileSecretJson', () => {
+        for (const [key, defaultValue] of Object.entries(config.secretJsonPropertyDefaults)) {
+            expect((config as any)[key]).toStrictEqual({"foo":"bat"});
+        }
     });
 
-    test('test MONGO_DBNAME', () => {
-        testConfigFileValue("MONGO_DBNAME");
+    test('test fileConfigItemStringDefaults', () => {
+        for (const [key, defaultValue] of Object.entries(config.stringPropertyDefaults)) {
+            if (key == "BUILT_AT") {
+                testConfigItemValue(key, "LOCAL", "default");
+            } else if (key == "CONFIG_FOLDER") {
+                testConfigItemValue(key, "./test/configTest", "environment");
+            } else {
+                testConfigItemValue(key, "TEST_VALUE", "file");
+            }
+        }
     });
 
-    test('test MONGO_COLLECTIONS', () => {
-        testConfigFileValue("MONGO_COLLECTIONS");
+    test('test fileConfigItemIntegerDefaults', () => {
+        for (const [key, defaultValue] of Object.entries(config.integerPropertyDefaults)) {
+            testConfigItemValue(key, "9999", "file")
+        }
     });
 
-    test('test CLIENT_OPTIONS', () => {
-        testConfigFileValue("CLIENT_OPTIONS");
+    test('test fileConfigItemSecretDefaults', () => {
+        const testScope = {
+            ...config.secretJsonPropertyDefaults,
+            ...config.secretStringPropertyDefaults
+        }
+        for (const [key, defaultValue] of Object.entries(testScope)) {
+            testConfigItemValue(key, "secret", "file")
+        }
     });
 
-    test('test INDEX_NAME', () => {
-        testConfigFileValue("INDEX_NAME");
-    });
-
-    test('test INDEX_MAPPING', () => {
-        testConfigFileValue("INDEX_MAPPING");
-    });
-
-    // Test that a file based config value is used
-    // Depends on the contents of ../../test/configTest
-    function testConfigFileValue(configName: string, secret: boolean = false) {
+    function testConfigItemValue(configName: string, expectedValue: string, expectedFrom: string) {
         const items = config.configItems;
-
         const item = items.find(i => i.name === configName);
         expect(item).toBeDefined();
         if (item) {
             expect(item.name).toBe(configName);
-            expect(item.from).toBe("file");
-            if (secret) {
-                expect(item.value).toBe("secret");
-            } else {
-                expect(item.value).toBe('"TEST_VALUE"');
-            }
+            expect(item.from).toBe(expectedFrom);
+            expect(item.value).toBe(expectedValue);
         }
     }
+
 });

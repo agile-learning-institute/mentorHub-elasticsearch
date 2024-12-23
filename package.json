@@ -5,7 +5,7 @@
     "start": "sleep 3; npm run local",
     "local": "LOAD_TEST_DATA=true node dist/bundle.js",
     "precontainer": "docker build --tag ghcr.io/agile-learning-institute/mentorhub-elasticsearch:latest .",
-    "container": "mh down; mh up mongodb,elasticsearch",
+    "container": "mh down; mh up elasticsearch",
     "test": "npx jest"
   },
   "devDependencies": {
