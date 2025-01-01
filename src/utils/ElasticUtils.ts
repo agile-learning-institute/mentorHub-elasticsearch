@@ -12,7 +12,7 @@ export default class ElasticUtils {
         if (await this.elasticSearchClient.ping()) {
             return 'Elasticsearch server is reachable';
         } else {
-            throw new Error('Did not recieve response from elasticsearch server');
+            throw new Error('Did not receive response from elasticsearch server');
         }
     }
 
@@ -45,22 +45,38 @@ export default class ElasticUtils {
     public async indexTestData(indexName: string, testData: Array<any>) {
         // Index the test data
         let errors = [];
-        let count = 0;
+        let indexedCount = 0;
+        let countCreated = 0;
+        let countUpdated = 0;
+        let countNoop = 0;
         for (const theDoc of testData) {
-            const response = await this.elasticSearchClient.index({index: indexName, document: theDoc});
-            count++;
-            if (response && response.result != "created") {
-                console.log(`Indexing Error on item ${count}, doc: ${theDoc}, reply: ${response}`);
+            const docId = `${theDoc.collection_name}_${theDoc.collection_id}`;
+            const response = await this.elasticSearchClient.update({
+                index: indexName, 
+                id: docId,
+                doc: theDoc,
+                doc_as_upsert: true
+            });
+            indexedCount++;
+            if (!response) {
+                throw new Error(`Indexing Error on item ${indexedCount}, doc: ${JSON.stringify(theDoc)}, reply: ${JSON.stringify(response)}`);
+            }
+            if (response.result == "updated") {
+                countUpdated++;
+            } else if (response.result == "created") {
+                countCreated++;
+            } else if (response.result == "noop") {
+                countNoop++;
             }
         }
-        return `Test Data Processed ${count} records, with ${errors.length} errors`
+        return `Processing Created ${countCreated} documents, Updated ${countUpdated} documents, ${countNoop} Noop - Total: ${indexedCount}`;
     }
 
     public async dropIndex(indexName: string) {
         if (await this.elasticSearchClient.indices.delete({index: indexName})) {
             return `Index ${indexName} removed`;
         } else {
-            throw new Error('Did not recieve response from elasticsearch server');
+            throw new Error('Did not receive response from elasticsearch server');
         }
     }
 }
